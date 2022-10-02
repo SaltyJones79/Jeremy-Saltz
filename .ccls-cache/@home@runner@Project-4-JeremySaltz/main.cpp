@@ -6,11 +6,37 @@
   Description of what program input is and form.......          
   Description of what program output is and form.......
 */ 
+#include "flightMap.h"
+#include <cassert>
+#include <fstream>
 #include <iostream>
+
 using namespace std;
 
 int main() {
+ifstream inputFile;//to input the file data into memory
+  int num;//stores the number of cities 
+  inputFile.open("cities.dat");//opens the "cities.dat" file
 
+  assert(inputFile);//checks for file
+  inputFile >> num;
+  
+  FlightMapClass map(num);//declare FlightMapClass variable
+  
+  map.ReadCities(inputFile);//sends the file to the implementation file to be stored in vector
+  
+  inputFile.close();//closes the file after it has been read
+
+  inputFile.open("flights.dat");//opens the "flights.dat" file to be read
+
+  assert(inputFile);//checks file
+
+  //send the file to the implementation file to be stored in the array of lists
+  map.BuildMap(inputFile);
+  
+  inputFile.close();//closes the file after it has been read
+  
+  map.DisplayMap();//calls the display method function from the implementation file
 
   return 0;
 }

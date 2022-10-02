@@ -16,6 +16,8 @@ public:
   FlightMapClass();
   // default constructor
 
+FlightMapClass(int num);
+
   FlightMapClass(const FlightMapClass &f);
   // copy constructor
 
@@ -34,7 +36,7 @@ public:
   // Pre-condition: list of the flight information is provided
   // Post-condition: Flight map is built
 
-  void DisplayMap();
+  void DisplayMap() const;
   // Displays the flight map in a formatted table
   // Pre-condition: none
   // Post-condition: Flight map is displayed
