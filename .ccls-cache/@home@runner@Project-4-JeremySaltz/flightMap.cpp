@@ -47,9 +47,9 @@ void FlightMapClass::ReadCities(ifstream &cityList) {
 }
 
 // this method creates the array of list from the "flights.dat" file by running
-// in parallel to the cities vector. It checks for origins that match the city in
-// the current element of the vector and if they match stores the flight record
-// in the matching element of the list array.
+// in parallel to the cities vector. It checks for origins that match the city
+// in the current element of the vector and if they match stores the flight
+// record in the matching element of the list array.
 void FlightMapClass::BuildMap(ifstream &mapList) {
   // variables to store the flight records from the "flights.dat" file before
   // they're then stored in the list array.
@@ -58,8 +58,8 @@ void FlightMapClass::BuildMap(ifstream &mapList) {
   flightRec temp1, temp2; // temperarry variables for the flightRec struct
 
   // This loop reads from the open "flights.dat" file comparing the cities in
-  // the vector to the origin from the file. It reads down the entire file and if
-  // and origin matches the city it push_back the flight record to the list
+  // the vector to the origin from the file. It reads down the entire file and
+  // if and origin matches the city it push_back the flight record to the list
   // array.
   for (int x = 0; x < cities.size(); x++) {
     // a while loop to read the file from top to bottom
@@ -69,19 +69,20 @@ void FlightMapClass::BuildMap(ifstream &mapList) {
       temp1.destination = destination;
       temp1.price = price;
       temp2.origin = cities[x]; // stores the city from the vector to
-                                    // compare to the origins
+                                // compare to the origins
       if (origin == temp2.origin)
         map[x].push_back(temp1);
-      
+
       mapList.ignore(100, '\n');
     }
     mapList.clear(); // clears the current stored file read to reset to the
                      // start on the next line
 
-    map[x].sort();// sorts each element
-    
-    mapList.seekg(0L,ios::beg); // when the file ends this goes back to the top of the file
-                   // to be read again to check for the next matching origin city
+    map[x].sort(); // sorts each element
+
+    mapList.seekg(0L, ios::beg); // when the file ends this goes back to the top
+                                 // of the file to be read again to check for
+                                 // the next matching origin city
   }
 }
 
@@ -101,13 +102,14 @@ void FlightMapClass::DisplayMap() const {
   // loop to read through each list array element and then display the flights
   // to the user
   for (int x = 0; x < size; x++) {
-    //iterates through each list stored in each element with a list
+    // iterates through each list stored in each element with a list
     for (curL = map[x].begin(); curL != map[x].end(); curL++) {
-      //if its the begining of the list show the origin and everything else
+      // if its the begining of the list show the origin and everything else
       if (curL == map[x].begin()) {
         cout << "From " << curL->origin
              << " to: " << setw(27 - curL->origin.length()) << *curL;
-      }//else if its not the begining then show the destinations, flight# and price
+      } // else if its not the begining then show the destinations, flight# and
+        // price
       else if (curL != map[x].begin())
         cout << setw((10 + curL->origin.length()) +
                      (27 - curL->origin.length()))
@@ -116,4 +118,15 @@ void FlightMapClass::DisplayMap() const {
   }
 }
 
-  
+bool FlightMapClass::CheckCity(string cityName) const {
+  bool validCity;
+
+  for (int x = 0; x < size; x++) {
+    if (cityName == cities[x]) {
+      validCity = true;
+      break;
+    } else
+      validCity = false;
+  }
+  return validCity;
+}

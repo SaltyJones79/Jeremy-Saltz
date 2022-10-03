@@ -8,6 +8,7 @@ using namespace std;
 #include "type.h"
 #include <list>
 #include <vector>
+#include<stack>
 using namespace std;
 
 class FlightMapClass {
