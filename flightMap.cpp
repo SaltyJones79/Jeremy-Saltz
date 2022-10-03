@@ -130,3 +130,15 @@ bool FlightMapClass::CheckCity(string cityName) const {
   }
   return validCity;
 }
+
+void FlightMapClass::DisplayAllCities() const{
+
+  for(int x =0; x < size; x++){
+    cout << cities[x]<< endl;
+  }
+}
+
+void FlightMapClass::FindPath(string originCity, string destinationCity){
+
+  
+}
