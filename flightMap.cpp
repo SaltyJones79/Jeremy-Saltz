@@ -174,13 +174,19 @@ int FlightMapClass::GetCityNumber(string cityName) const {
 void FlightMapClass::MarkVisited(int city) { visited[city] = true; }
 
 bool FlightMapClass::GetNextCity(string fromCity, string &nextCity){
+  bool notVisited;
   list<flightRec>::iterator i;
   if(map[GetCityNumber(fromCity)].empty())
-    return false;
+    notVisited = false;
   else if(!map[GetCityNumber(fromCity)].empty()){
     i = map[GetCityNumber(fromCity)].begin();
     nextCity = i->destination;
+    if(IsVisited(GetCityNumber(nextCity))==true)
+      notVisited = false;
+    else
+      notVisited = true;
   }
+  return notVisited;
 }
 
 bool FlightMapClass::IsVisited(int city) const {
