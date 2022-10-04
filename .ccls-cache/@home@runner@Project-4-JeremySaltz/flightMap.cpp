@@ -132,14 +132,57 @@ bool FlightMapClass::CheckCity(string cityName) const {
   return validCity;
 }
 
-void FlightMapClass::DisplayAllCities() const{
+void FlightMapClass::DisplayAllCities() const {
 
-  for(int x =0; x < size; x++){
-    cout << cities[x]<< endl;
+  for (int x = 0; x < size; x++) {
+    cout << cities[x] << endl;
   }
 }
 
-bool FlightMapClass::FindPath(string originCity, string destinationCity){
+bool FlightMapClass::FindPath(string originCity, string destinationCity) {
 
-  
+  string topCity, nextCity;
+  bool success;
+
+  UnvisitAll();
+  aStack.push(originCity);
+  MarkVisited(GetCityNumber(originCity));
+  topCity = aStack.top();
+  while(!aStack.empty() && topCity != destinationCity){
+    success = GetNextCity(topCity, nextCity);
+  }
+}
+
+void FlightMapClass::UnvisitAll() {
+
+  for (int x = 0; x < visited.size(); x++)
+    visited[x] = false;
+}
+
+int FlightMapClass::GetCityNumber(string cityName) const {
+  int cityNum;
+
+  for (int x = 0; x < cities.size(); x++) {
+    if (cities[x] == cityName) {
+      cityNum = x;
+      break;
+    }
+  }
+  return cityNum;
+}
+
+void FlightMapClass::MarkVisited(int city) { visited[city] = true; }
+
+bool FlightMapClass::GetNextCity(string fromCity, string &nextCity){
+  list<flightRec>::iterator i;
+  if(map[GetCityNumber(fromCity)].empty())
+    return false;
+  else if(!map[GetCityNumber(fromCity)].empty()){
+    i = map[GetCityNumber(fromCity)].begin();
+    nextCity = i->destination;
+  }
+}
+
+bool FlightMapClass::IsVisited(int city) const {
+  return visited[city];
 }

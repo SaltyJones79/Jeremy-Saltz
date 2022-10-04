@@ -95,10 +95,10 @@ FlightMapClass(int num);
 
 
 private:
+  stack<string> aStack;
   int size;              // number of cities
   vector<string> cities; // list of cities
   list<flightRec> *map;  // flight map
-  stack<string> aStack;
   vector<bool> visited;  // newly added for this part: to check if a city has been visited before
 };
 
