@@ -85,7 +85,7 @@ FlightMapClass(int num);
   // Pre-condition: number of a city is provided
   // Post-condition: returns the city's name
 
-  void FindPath(string originCity, string destinationCity);
+  bool FindPath(string originCity, string destinationCity);
   // Determines whether a sequence of flights between two cities exists.
   // Pre-condition: originCity and destinationCity are the origin and destination city, respectively
   // Post-condition: returns true if a sequence of flights exists
@@ -98,7 +98,7 @@ private:
   int size;              // number of cities
   vector<string> cities; // list of cities
   list<flightRec> *map;  // flight map
-
+  stack<string> aStack;
   vector<bool> visited;  // newly added for this part: to check if a city has been visited before
 };
 

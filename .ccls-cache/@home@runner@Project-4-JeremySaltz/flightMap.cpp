@@ -34,6 +34,7 @@ void FlightMapClass::ReadCities(ifstream &cityList) {
   // while there are cities on the dat file store the cities to the vector
   while (cityList >> city) {
     cities.push_back(city);
+    visited.push_back(false);
     cityList.ignore(100, '\n'); // moves to the next item on the file
   }
 
@@ -138,7 +139,7 @@ void FlightMapClass::DisplayAllCities() const{
   }
 }
 
-void FlightMapClass::FindPath(string originCity, string destinationCity){
+bool FlightMapClass::FindPath(string originCity, string destinationCity){
 
   
 }
