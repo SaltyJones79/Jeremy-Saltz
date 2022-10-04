@@ -158,6 +158,7 @@ bool FlightMapClass::FindPath(string originCity, string destinationCity) {
     }
     topCity = aStack.top();
   }
+  return success;
 }
 
 void FlightMapClass::UnvisitAll() {

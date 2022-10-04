@@ -70,7 +70,8 @@ void getFlight(FlightMapClass &m) {
     else if (m.CheckCity(destination) != true)
       cout << "Sorry, BlueSky airline does not serve " << destination << "."
            << endl;
-    else
-      m.FindPath(origin, destination);
+    else if (m.FindPath(origin, destination) != true)
+      cout << "Sorry, BlueSky airline does not fly from " << origin << " to "
+           << destination << endl;
   }
 }
