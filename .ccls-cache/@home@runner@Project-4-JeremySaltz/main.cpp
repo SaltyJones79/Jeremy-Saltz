@@ -13,8 +13,7 @@
 
 using namespace std;
 
-void getFlight();
-void checkFlight(string o, string d);
+void getFlight(FlightMapClass &m);
 
 int main() {
   ifstream inputFile; // to input the file data into memory
@@ -44,14 +43,14 @@ int main() {
   map.DisplayMap(); // calls the display method function from the implementation
                     // file
 
-  getFlight();
+  getFlight(map);
   // map.DisplayAllCities();
   outputFile.open("requests.dat");
 
   return 0;
 }
 
-void getFlight() {
+void getFlight(FlightMapClass &m) {
   string origin, destination;
 
   cout << endl << endl;
@@ -64,18 +63,14 @@ void getFlight() {
   cout << "Enter destination city: ";
   getline(cin, destination);
 
-  cout << "Request is to fly from "<< origin << " to " << destination << ".\n";
-
-  checkFlight(origin, destination);
-}
-
-void checkFlight(string o, string d) {
-  FlightMapClass m;
-
-  if(m.CheckCity(o)!=true)
-    cout << "Sorry, BlueSky airline does not serve "<<o<<"." << endl;
-  else if(m.CheckCity(d)!=true)
-    cout << "Sorry, BlueSky airline does not serve "<<d<<"." << endl;
-  else
-    m.FindPath(o, d);
+  cout << "Request is to fly from " << origin << " to " << destination << ".\n";
+  while (m.CheckCity(origin) != true || m.CheckCity(destination) != true) {
+    if (m.CheckCity(origin) != true)
+      cout << "Sorry, BlueSky airline does not serve " << origin << "." << endl;
+    else if (m.CheckCity(destination) != true)
+      cout << "Sorry, BlueSky airline does not serve " << destination << "."
+           << endl;
+    else
+      m.FindPath(origin, destination);
+  }
 }
