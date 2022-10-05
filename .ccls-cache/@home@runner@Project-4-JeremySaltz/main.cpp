@@ -13,11 +13,10 @@
 
 using namespace std;
 
-void getFlight(FlightMapClass &m);
+void getFlight(FlightMapClass &m, ifstream &requests);
 
 int main() {
-  ifstream inputFile; // to input the file data into memory
-  ofstream outputFile;
+  ifstream inputFile;           // to input the file data into memory
   int num;                      // stores the number of cities
   inputFile.open("cities.dat"); // opens the "cities.dat" file
 
@@ -42,36 +41,34 @@ int main() {
 
   map.DisplayMap(); // calls the display method function from the implementation
                     // file
+  inputFile.open("requests.dat");
 
-  getFlight(map);
-  // map.DisplayAllCities();
-  outputFile.open("requests.dat");
+  assert(inputFile);
+
+  getFlight(map, inputFile);
 
   return 0;
 }
 
-void getFlight(FlightMapClass &m) {
+void getFlight(FlightMapClass &m, ifstream &requests) {
   string origin, destination;
 
-  cout << endl << endl;
-  cout << "Welcome to BlueSky airline!\n"
-       << "Where will you be flying from?\n";
-  cout << "Enter origin city: ";
-  getline(cin, origin);
+  while (requests >> origin >> destination) {
+    cout << endl << endl;
 
-  cout << "Where will you be flying to\n";
-  cout << "Enter destination city: ";
-  getline(cin, destination);
-
-  cout << "Request is to fly from " << origin << " to " << destination << ".\n";
-  while (m.CheckCity(origin) != true || m.CheckCity(destination) != true) {
-    if (m.CheckCity(origin) != true)
-      cout << "Sorry, BlueSky airline does not serve " << origin << "." << endl;
-    else if (m.CheckCity(destination) != true)
-      cout << "Sorry, BlueSky airline does not serve " << destination << "."
-           << endl;
-    else if (m.FindPath(origin, destination) != true)
-      cout << "Sorry, BlueSky airline does not fly from " << origin << " to "
-           << destination << endl;
+    cout << "Request is to fly from " << origin << " to " << destination
+         << ".\n";
+    while (!m.CheckCity(origin) || !m.CheckCity(destination) ||
+           !m.FindPath(origin, destination)) {
+      if (m.CheckCity(origin) != true)
+        cout << "Sorry, BlueSky airline does not serve " << origin << "."
+             << endl;
+      else if (m.CheckCity(destination) != true)
+        cout << "Sorry, BlueSky airline does not serve " << destination << "."
+             << endl;
+      else if (m.FindPath(origin, destination) != true)
+        cout << "Sorry, BlueSky airline does not fly from " << origin << " to "
+             << destination << endl;
+    }
   }
 }
