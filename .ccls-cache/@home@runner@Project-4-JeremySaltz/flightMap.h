@@ -95,7 +95,7 @@ FlightMapClass(int num);
 
 
 private:
-  stack<string> aStack;
+  stack<string> aStack, rendStack;
   int size;              // number of cities
   vector<string> cities; // list of cities
   list<flightRec> *map;  // flight map
