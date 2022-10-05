@@ -193,19 +193,19 @@ bool FlightMapClass::GetNextCity(string fromCity, string &nextCity) {
     i = map[GetCityNumber(fromCity)].begin();
     nextCity = i->destination;
     
-    while (IsVisited(GetCityNumber(fromCity)) &&
+    while (i != map[GetCityNumber(fromCity)].end() &&
            IsVisited(GetCityNumber(nextCity))) { 
       i++;
       nextCity = i->destination;
-      if(i == map[GetCityNumber(fromCity)].end())
-        break;
     }
     if (!IsVisited(GetCityNumber(nextCity)))
       notVisited = true;
-    else
+    else if(IsVisited(GetCityNumber(fromCity)) &&
+           IsVisited(GetCityNumber(nextCity)))
       notVisited = false;
   } else
     notVisited = false;
+  cout << fromCity << " " << notVisited << endl;
   return notVisited;
 }
 
