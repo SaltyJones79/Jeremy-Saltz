@@ -93,9 +93,14 @@ FlightMapClass(int num);
   //              Cities visited during the search are marked as visited
   //              in the flight map.
 
+  void clearStack();
+
+  void reverseStack();
+
+  void printFlight(string org, string dest);
 
 private:
-  stack<string> aStack, rendStack;
+  stack<string> aStack, rStack;
   int size;              // number of cities
   vector<string> cities; // list of cities
   list<flightRec> *map;  // flight map

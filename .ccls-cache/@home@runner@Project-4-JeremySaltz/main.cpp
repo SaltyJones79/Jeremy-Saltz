@@ -58,17 +58,8 @@ void getFlight(FlightMapClass &m, ifstream &requests) {
 
     cout << "Request is to fly from " << origin << " to " << destination
          << ".\n";
-    /*
-        if (m.CheckCity(origin) != true)
-          cout << "Sorry, BlueSky airline does not serve " << origin << "."
-               << endl;
-        else if (m.CheckCity(destination) != true)
-          cout << "Sorry, BlueSky airline does not serve " << destination << "."
-               << endl;*/
-    cout << "This check!" << endl;
     if (!m.FindPath(origin, destination))
       cout << "Sorry, BlueSky airline does not fly from " << origin << " to "
            << destination << endl;
-    cout << "Another check!" << endl;
   }
 }
