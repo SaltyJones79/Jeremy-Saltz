@@ -165,7 +165,7 @@ bool FlightMapClass::FindPath(string originCity, string destinationCity) {
 
   if (success) {
     reverseStack();
-    printFlight(originCity,destinationCity);
+    printFlight(originCity, destinationCity);
   }
 
   return success;
@@ -237,24 +237,33 @@ void FlightMapClass::printFlight(string orgin, string destination) {
   string org, dest;
   int totalPrice = 0;
   list<flightRec>::iterator i;
-
-  cout << "Flight #" << setw(8) << "From" << setw(12) << "To" << setw(17)
+  cout << "The flight itinerary is:\n";
+  cout << "Flight #" << setw(7) << "From" << setw(15) << "To" << setw(15)
        << "Cost\n";
 
-  while (!rStack.empty()&& dest != destination) {
+  while (!rStack.empty() && dest != destination) {
     org = rStack.top();
     rStack.pop();
     dest = rStack.top();
     for (i = map[GetCityNumber(org)].begin();
          i != map[GetCityNumber(org)].end(); i++) {
       if (i->destination == dest) {
-        cout << i->flightNum << setw(5 + i->origin.length()) << i->origin
-             << setw(25- i->origin.length()) << i->destination << setw(8) <<"$" << i->price
-             << endl;
+        cout << setw(2)<< i->flightNum;
+        if (i->flightNum < 999)
+          cout << setw(6 + i->origin.length()) << i->origin
+               << setw(25 - i->origin.length()) << i->destination << setw(7)
+               << "$ " << i->price << endl;
+        else
+          cout << setw(5 + i->origin.length()) << i->origin
+               << setw(25 - i->origin.length()) << i->destination << setw(7)
+               << "$ " << i->price << endl;
         totalPrice += i->price;
         break;
       }
     }
   }
-  cout << setw(41)<<"Total: $" << totalPrice << endl;
+  if (totalPrice < 999)
+    cout << setw(41) << "Total: $ " << totalPrice << endl;
+  else
+    cout << setw(40) << "Total: $ " << totalPrice << endl;
 }

@@ -39,7 +39,7 @@ int main() {
 
   inputFile.close(); // closes the file after it has been read
 
-  map.DisplayMap(); // calls the display method function from the implementation
+  //map.DisplayMap(); // calls the display method function from the implementation
                     // file
   inputFile.open("requests.dat");
 
